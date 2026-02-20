@@ -1,15 +1,32 @@
 {
   "name": "feriados-api",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "elizeu",
-  "type": "commonjs",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
+  "main": "dist/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "migrate": "ts-node src/migrations/001_create_feriados_table.ts",
+    "populate": "ts-node scripts/populateNacionais.ts",
+    "test": "k6 run -e API_BASE='http://localhost:3000' tests/tests-open.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
+    "sequelize": "^6.35.1",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-validator": "^7.0.1",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.4",
+    "@types/validator": "^13.11.7",
+    "@types/cors": "^2.8.17",
+    "typescript": "^5.3.3",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.1"
   }
 }
